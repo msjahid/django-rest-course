@@ -1,15 +1,21 @@
-
 from django.contrib import admin
-from .models import StudentInfo, SubjectList, TeacherInfo
+from .models import Student, Subject, Teacher, Review
 
-admin.site.register(SubjectList)
+admin.site.register(Subject)
 
-@admin.register(StudentInfo)
+
+@admin.register(Student)
 class StudentInfoAdmin(admin.ModelAdmin):
 
-    list_display = ['id', 'student_name', 'student_id', 'subject_list', 'address']
+    list_display = ['student_id', 'student_name', 'subject_list', 'address']
 
-@admin.register(TeacherInfo)
+
+@admin.register(Teacher)
 class TeacherInfoAdmin(admin.ModelAdmin):
 
-    list_display = ['id', 'teacher_name', 'teacher_id', 'type', 'course', 'contact']
+    list_display = ['teacher_id', 'teacher_name', 'type', 'teacher_subject', 'contact']
+
+
+@admin.register(Review)
+class ReviewInfoAdmin(admin.ModelAdmin):
+    list_display = ['id', 'rating', 'description', 'review_list', 'active', 'created']

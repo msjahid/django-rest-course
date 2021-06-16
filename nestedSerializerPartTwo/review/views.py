@@ -1,13 +1,13 @@
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
-from .models import StudentInfo, SubjectList, TeacherInfo, Review
+from .models import Student, Subject, Teacher, Review
 from .serializers import StudentSerializer, SubjectSerializer, TeacherSerializer, ReviewSerializer
 
 
 class SubjectListAV(APIView):
     def get(self, request):
-        subject = SubjectList.objects.all()
+        subject = Subject.objects.all()
         serializer = SubjectSerializer(subject, many=True, context={'request': request})
         return Response(serializer.data)
 
@@ -24,15 +24,15 @@ class SubjectDetailsAV(APIView):
 
     def get(self, request, pk):
         try:
-            subject = SubjectList.objects.get(pk=pk)
-        except SubjectList.DoesNotExist:
+            subject = Subject.objects.get(pk=pk)
+        except Subject.DoesNotExist:
             return Response({'Error': 'Subject info not in there'}, status=status.HTTP_404_NOT_FOUND)
 
         serializer = SubjectSerializer(subject, context={'request': request})
         return Response(serializer.data)
 
     def put(self, request, pk):
-        subject = SubjectList.objects.get(pk=pk)
+        subject = Subject.objects.get(pk=pk)
         serializer = SubjectSerializer(subject, data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -41,7 +41,7 @@ class SubjectDetailsAV(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
-        subject = SubjectList.objects.get(pk=pk)
+        subject = Subject.objects.get(pk=pk)
         subject.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -49,7 +49,7 @@ class SubjectDetailsAV(APIView):
 class StudentListAV(APIView):
 
     def get(self, request):
-        students = StudentInfo.objects.all()
+        students = Student.objects.all()
         serializer = StudentSerializer(students, many=True, context={'request': request})
         return Response(serializer.data)
 
@@ -66,15 +66,34 @@ class StudentDetailAV(APIView):
 
     def get(self, request, pk):
         try:
-            student = StudentInfo.objects.get(pk=pk)
-        except StudentInfo.DoesNotExist:
+            student = Student.objects.get(pk=pk)
+        #     # teachers = Teacher.objects.filter(subject_ids=student.id)
+        #     teachers = Teacher.objects.filter(subject_ids=student.id).values('teacher_name', 'type', 'subject_ids')
+        #     # for k in teachers:
+        #     #     print(k,type(k))
+        #     serializer = StudentSerializer(student, context={'request': request})
+        #     # teacher_response_serializer.is_valid(raise_exception=True)
+        #     # print('line 76', teachers)
+        #     # print('line 72', teacher_response_serializer.data['teacher_name'])
+        except Student.DoesNotExist:
             return Response({'Error': 'Student info not in there'}, status=status.HTTP_404_NOT_FOUND)
 
         serializer = StudentSerializer(student, context={'request': request})
         return Response(serializer.data)
+        # return Response(
+        #         {
+        #             # "id": student.id,
+        #             # "student_name": student.student_name,
+        #             # "student_id": student.student_id,
+        #             # "subject_ids": student.subject_ids,
+        #             # "address": student.address,
+        #             "student": serializer.data,
+        #             "teachers": teachers
+        #         }
+        #     )
 
     def put(self, request, pk):
-        student = StudentInfo.objects.get(pk=pk)
+        student = Student.objects.get(pk=pk)
         serializer = StudentSerializer(student, data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -83,14 +102,14 @@ class StudentDetailAV(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
-        student = StudentInfo.objects.get(pk=pk)
+        student = Student.objects.get(pk=pk)
         student.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class TeacherListAV(APIView):
     def get(self, request):
-        teacher = TeacherInfo.objects.all()
+        teacher = Teacher.objects.all()
         serializer = TeacherSerializer(teacher, many=True, context={'request': request})
         return Response(serializer.data)
 
@@ -107,15 +126,15 @@ class TeacherDetailsAV(APIView):
 
     def get(self, request, pk):
         try:
-            teacher = TeacherInfo.objects.get(pk=pk)
-        except TeacherInfo.DoesNotExist:
+            teacher = Teacher.objects.get(pk=pk)
+        except Teacher.DoesNotExist:
             return Response({'Error': 'Teacher info not in there'}, status=status.HTTP_404_NOT_FOUND)
 
         serializer = TeacherSerializer(teacher, context={'request': request})
         return Response(serializer.data)
 
     def put(self, request, pk):
-        teacher = TeacherInfo.objects.get(pk=pk)
+        teacher = Teacher.objects.get(pk=pk)
         serializer = TeacherSerializer(teacher, data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -124,14 +143,14 @@ class TeacherDetailsAV(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
-        teacher = TeacherInfo.objects.get(pk=pk)
+        teacher = Teacher.objects.get(pk=pk)
         teacher.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class reviewListAV(APIView):
+class ReviewListAV(APIView):
     def get(self, request):
-        review = ReviewInfo.objects.all()
+        review = Review.objects.all()
         serializer = ReviewSerializer(review, many=True, context={'request': request})
         return Response(serializer.data)
 
@@ -144,19 +163,19 @@ class reviewListAV(APIView):
             return Response(serializer.errors)
 
 
-class reviewDetailsAV(APIView):
+class ReviewDetailsAV(APIView):
 
     def get(self, request, pk):
         try:
-            review = ReviewInfo.objects.get(pk=pk)
-        except ReviewInfo.DoesNotExist:
+            review = Review.objects.get(pk=pk)
+        except Review.DoesNotExist:
             return Response({'Error': 'Review info not in there'}, status=status.HTTP_404_NOT_FOUND)
 
         serializer = ReviewSerializer(review, context={'request': request})
         return Response(serializer.data)
 
     def put(self, request, pk):
-        review = ReviewInfo.objects.get(pk=pk)
+        review = Review.objects.get(pk=pk)
         serializer = ReviewSerializer(review, data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -165,7 +184,6 @@ class reviewDetailsAV(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
-        review = ReviewInfo.objects.get(pk=pk)
+        review = Review.objects.get(pk=pk)
         review.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
