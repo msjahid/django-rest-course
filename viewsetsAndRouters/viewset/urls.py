@@ -1,16 +1,20 @@
-from django.urls import path
+from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
 from .views import (StudentListAV, StudentDetailAV, SubjectListAV, SubjectDetailsAV,
-                    TeacherListAV, TeacherDetailsAV, ReviewList, ReviewDetail, ReviewCreate)
+                    TeacherListAV, TeacherDetailsAV, ReviewList, ReviewDetail, ReviewCreate, StudentList)
 
 
-routes = DefaultRouter()
-router.register('subject' 6:48)
+router = DefaultRouter()
+router.register('student', StudentList, basename='student-list')
 
 urlpatterns = [
-    path('student/', StudentListAV.as_view(), name='list_student'),
-    path('student/<int:pk>/', StudentDetailAV.as_view(), name='studentinfo-detail'),
+
+    path('', include(router.urls)),
+
+    # path('student/', StudentListAV.as_view(), name='list_student'),
+    # path('student/<int:pk>/', StudentDetailAV.as_view(), name='studentinfo-detail'),
+
 
     path('subject/', SubjectListAV.as_view(), name='list_subject'),
     path('subject/<int:pk>/', SubjectDetailsAV.as_view(), name='subjectlist-detail'),

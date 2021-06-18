@@ -30,20 +30,6 @@ class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ReviewSerializer
 
 
-class SubjectList(viewsets.ViewSet):
-
-    def list(self, request):
-        queryset = Subject.objects.all()
-        serializer = SubjectSerializer(queryset, many=True)
-        return Response(serializer.data)
-
-    def retrieve(self, request, pk=None):
-        queryset = Subject.objects.all()
-        student = get_object_or_404(queryset, pk=pk)
-        serializer = SubjectSerializer(student)
-        return Response(serializer.data)
-
-
 class SubjectListAV(APIView):
     def get(self, request):
         subject = Subject.objects.all()
@@ -83,6 +69,42 @@ class SubjectDetailsAV(APIView):
         subject = Subject.objects.get(pk=pk)
         subject.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class StudentList(viewsets.ViewSet):
+
+    def list(self, request):
+        queryset = Student.objects.all()
+        serializer = StudentSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        queryset = Student.objects.all()
+        student = get_object_or_404(queryset, pk=pk)
+        serializer = StudentSerializer(student)
+        return Response(serializer.data)
+
+    def create(self, request):
+        serializer = StudentSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors)
+
+    def destroy(self, request, pk):
+        student = Student.objects.get(pk=pk)
+        student.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def update(self, request, pk):
+        student = Student.objects.get(pk=pk)
+        serializer = StudentSerializer(student, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class StudentListAV(APIView):
