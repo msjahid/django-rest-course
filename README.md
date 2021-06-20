@@ -126,7 +126,7 @@ Free open source and learning purposes
 
 ### Chapter Tweenty
 
-    19. User Model adding and Custome filerting for single submission
+    20. User Model adding and Custome filerting for single submission
 - [Documentation](https://docs.djangoproject.com/en/3.2/topics/auth/customizing/#specifying-custom-user-model)    
 - [Code Link](https://github.com/msjahid/django-rest-course/tree/main/UserModel)
 
