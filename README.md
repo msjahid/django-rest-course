@@ -130,3 +130,8 @@ Free open source and learning purposes
 - [Documentation](https://docs.djangoproject.com/en/3.2/topics/auth/customizing/#specifying-custom-user-model)    
 - [Code Link](https://github.com/msjahid/django-rest-course/tree/main/UserModel)
 
+### Chapter Tweenty One
+
+    21. Adding login to the Browsable API
+- [Documentation](https://www.django-rest-framework.org/tutorial/4-authentication-and-permissions/#adding-login-to-the-browsable-api)    
+- [Code Link](https://github.com/msjahid/django-rest-course/blob/main/api-auth/config/urls.py)
