@@ -123,3 +123,10 @@ Free open source and learning purposes
     19. ModelViewSet & ReadOnlyModelViewSet
 - [Documentation](https://www.django-rest-framework.org/api-guide/viewsets/#modelviewset)    
 - [Code Link](https://github.com/msjahid/django-rest-course/blob/main/ModelViewSet/viewset/views.py)
+
+### Chapter Tweenty
+
+    19. User Model adding and Custome filerting for single submission
+- [Documentation](https://docs.djangoproject.com/en/3.2/topics/auth/customizing/#specifying-custom-user-model)    
+- [Code Link](https://github.com/msjahid/django-rest-course/tree/main/UserModel)
+
