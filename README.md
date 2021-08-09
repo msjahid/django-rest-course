@@ -135,3 +135,15 @@ Free open source and learning purposes
     21. Adding login to the Browsable API
 - [Documentation](https://www.django-rest-framework.org/tutorial/4-authentication-and-permissions/#adding-login-to-the-browsable-api)    
 - [Code Link](https://github.com/msjahid/django-rest-course/blob/main/api-auth/config/urls.py)
+
+### Chapter Tweenty Two
+
+    21. Custom calculation 
+- [Documentation](https://docs.djangoproject.com/en/3.2/topics/db/aggregation/)    
+- [Code Link](https://github.com/msjahid/django-rest-course/tree/main/custom_calculation)
+
+### Chapter Tweenty Three
+
+    21. Basic Authentication
+- [Documentation](https://www.django-rest-framework.org/api-guide/authentication/#basicauthentication)    
+- [Code Link](https://github.com/msjahid/django-rest-course/tree/main/Basic_Authentication)
